@@ -480,7 +480,9 @@ export async function getTokenStats(tokenMint: PublicKey = TOKEN_MINT): Promise<
             }
           } else if (pumpData.price_usd) {
             price = pumpData.price_usd; // Already in USD
-            marketCap = price * totalSupply;
+            if (price && totalSupply > 0) {
+              marketCap = price * totalSupply;
+            }
           }
         }
       } catch (e) {
